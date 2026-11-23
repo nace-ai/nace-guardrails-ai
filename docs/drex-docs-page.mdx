@@ -1,0 +1,39 @@
+---
+title: Guardrails AI
+description: Check text and images in Guardrails AI with DrexPolicy.
+---
+
+Use [Drex](/drex) as a policy validator in [Guardrails AI](https://github.com/guardrails-ai/guardrails). `DrexPolicy` asks one Drex question about a string. Set the threshold for a policy failure.
+
+## Install
+
+```bash
+pip install drex-policy
+```
+
+Create a key and set it as `NACE_API_KEY`. See [Authentication](/drex/guides/authentication).
+
+## Check an assistant reply
+
+```python
+from guardrails import Guard
+from nace_sdk import Noul
+
+from drex_policy import DrexPolicy
+
+policy = DrexPolicy(
+    question=Noul(instructions="Does the reply ask for a customer's password?"),
+    fail_at=0.5,
+    on_fail="exception",
+)
+guard = Guard().use(policy)
+guard.validate("Open Settings to update your password.")
+```
+
+The guard raises `ValidationError` when P(yes) meets or exceeds `fail_at`. Adapt the threshold using labeled examples for your policy. Use `Score` for an ordered rubric. [Drex questions](/drex/guides/questions)
+
+Use `Guard().use(policy, on="messages")` to check inputs before an LLM call. For images, pass `metadata={"images": [image_input(path)]}` with a model that supports images. Import `image_input` from `nace_sdk`. [Drex models](/drex/reference/models)
+
+Read the Drex answer from `guard.history.last.validator_logs[0].validation_result.metadata`. The metadata includes the model that answered and the threshold used.
+
+SDK errors propagate by default. Set `on_error="fail"` if you want Guardrails to apply the configured failure action when Drex cannot decide. Use `AsyncGuard` for native async validation. [DrexPolicy reference and examples](https://github.com/nace-ai/nace-guardrails-ai)

@@ -1,0 +1,30 @@
+---
+title: "Two validations share one policy"
+---
+stateDiagram-v2
+  direction LR
+  state "At the same time" as all {
+    state "First validation" as r0 {
+      s0: Ready
+      s1: Drex call in flight
+      s2: Result returned
+      s3: Reply received in worker
+      [*] --> s0
+      s0 --> s1: request starts
+      s1 --> s3: worker reads reply
+      s1 --> s2: result returns [unless Reply received in worker]
+      s3 --> s2: result returns
+    }
+    --
+    state "Second validation" as r1 {
+      s4: Ready
+      s5: Drex call in flight
+      s6: Result returned
+      s7: Reply received in worker
+      [*] --> s4
+      s4 --> s5: request starts
+      s5 --> s7: worker reads reply
+      s5 --> s6: result returns [unless Reply received in worker]
+      s7 --> s6: result returns
+    }
+  }

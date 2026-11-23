@@ -1,15 +1,15 @@
 # Notes for coding agents
 
-This repo is `nace-ai/nace-guardrails-ai` (Drex for Guardrails AI), published to PyPI as `drex-policy`: one Guardrails validator, `DrexPolicy`, that asks Drex a `noul` or `score` question through `nace-sdk`. See [CONTRIBUTING.md](CONTRIBUTING.md) for the layout, setup and release steps.
+This repo is `nace-ai/nace-guardrails-ai` (Drex for Guardrails AI), published to PyPI as `drex-policy`. Its Guardrails validator, `DrexPolicy`, asks Drex one `noul` or `score` question through `nace-sdk`. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and release checks.
 
 ## Rules
 
-- Call Drex only through `nace-sdk`. Do not add another HTTP client or an LLM library.
-- The default model is `drex-v2.0`. Pass other model ids through unchanged; `drex-latest` is not `drex-max`.
-- Images are allowed only with `model="drex-max"`, at most 8. Raise `DrexPolicyError` before the call otherwise; never drop images.
-- Tests use a fake Nace client. They must not need an API key or the network.
-- Every package imported by `drex_policy/` is listed in `[project] dependencies`; test and lint tools go in the `dev` extra.
-- Keys are listed in `.env.example` with no values. Never commit `.env`.
-- Run `make qa` (ruff, pyright, pytest) before you push.
-- The package directory stays `drex_policy/`. A top-level `validator` module from PyPI would collide with other validators.
-- The code is MIT-licensed, copyright Nace.AI. Do not copy code into this repo from projects under other licenses.
+- Call Drex only through `nace-sdk`.
+- The default model is the pinned ID `drex-max-v1.1`. Send explicit model IDs and aliases unchanged.
+- Reject images with the text-only model `drex-v2.0` and more than eight images before the call. Keep the image order for all other IDs. Accept base64, data URLs, and values from `nace_sdk.image_input()`. Raise `DrexPolicyError` for bad image input.
+- Offline tests use fake clients or an SDK client with `httpx.MockTransport`. They need no key or network. Keep live tests under the `live` marker.
+- Declare each third-party package imported by `drex_policy/` in the project dependencies. Declare test and lint tools in the `dev` extra.
+- List keys in `.env.example` without values. Keep `.env` out of version control.
+- Run `make qa` and `make artifact-test` before you push.
+- Keep the package directory `drex_policy/`. A top-level `validator` package would collide with other validators.
+- The code is MIT-licensed, copyright Nace.AI. Use original code in this repository.

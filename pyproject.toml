@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "drex-policy"
-version = "0.1.0"
+version = "0.2.0"
 description = "Guardrails validator that checks text, or text with images, against a Drex noul or score question."
 authors = [{ name = "Nace.AI", email = "alish@nace.ai" }]
 license = "MIT"
@@ -12,7 +12,7 @@ license-files = ["LICENSE"]
 readme = "README.md"
 requires-python = ">=3.10,<4"
 dependencies = [
-    "guardrails-ai>=0.4.0",
+    "guardrails-ai>=0.9.0",
     "nace-sdk>=0.6.2",
 ]
 
@@ -22,13 +22,20 @@ Repository = "https://github.com/nace-ai/nace-guardrails-ai"
 Issues = "https://github.com/nace-ai/nace-guardrails-ai/issues"
 
 [project.optional-dependencies]
-dev = ["pyright", "pytest", "ruff"]
+dev = ["build", "httpx", "hypothesis", "pyright", "pytest", "pytest-asyncio", "ruff"]
 
 [tool.setuptools]
 packages = ["drex_policy"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+asyncio_default_fixture_loop_scope = "function"
+addopts = "-m 'not live'"
+markers = ["live: calls Drex with NACE_API_KEY"]
 
 [tool.pyright]
 include = ["drex_policy"]
+exclude = ["formal/.tools", "**/.cache", "**/__pycache__"]
+
+[tool.ruff]
+extend-exclude = ["formal/.tools", "**/.cache", "**/__pycache__"]

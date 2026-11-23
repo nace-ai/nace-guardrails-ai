@@ -1,3 +1,3 @@
-from .main import DrexPolicy
+from .main import DrexPolicy, DrexPolicyError
 
-__all__ = ["DrexPolicy"]
+__all__ = ["DrexPolicy", "DrexPolicyError"]
