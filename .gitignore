@@ -14,3 +14,8 @@ dist/
 # Editors
 .idea/
 .vscode/
+
+# Local compatibility logs and evaluation input cache
+.compat-logs/
+.hypothesis/
+eval/.cache/

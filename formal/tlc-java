@@ -1,0 +1,9 @@
+#!/bin/sh
+# Keep SANY on the ordinary JVM and run TLC without an unused RMI listener.
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+case " $* " in
+  *' tlc2.TLC '*)
+    exec java -Xmx256m -XX:+UseParallelGC --class-path "$TLA2TOOLS" "$script_dir/OfflineTLC.java" "$@"
+    ;;
+  *) exec java "$@" ;;
+esac

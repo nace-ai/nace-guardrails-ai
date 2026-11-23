@@ -1,0 +1,239 @@
+{
+  "sync_commit": "babb3e5 plus uncommitted changes",
+  "source_sha256": "9006a0de5eabb9b3a6229abbe9448d44355be78b7d2aec159e49ee6552934c28",
+  "versions": {
+    "guardrails-ai": "0.11.0",
+    "nace-sdk": "0.11.2",
+    "hypothesis": "6.170.17"
+  },
+  "models": {
+    "Validation": {
+      "states": 2321,
+      "failures": []
+    },
+    "Concurrency": {
+      "states": 41,
+      "failures": []
+    }
+  },
+  "paths": {
+    "Validation": 933,
+    "Concurrency": 46
+  },
+  "summary": {
+    "P1": {
+      "pass": true,
+      "baseline_holds": true,
+      "mutants_killed": true
+    },
+    "P2": {
+      "pass": true,
+      "baseline_holds": true,
+      "mutants_killed": true
+    },
+    "P3": {
+      "pass": true,
+      "baseline_holds": true,
+      "mutants_killed": true
+    },
+    "P4": {
+      "pass": true,
+      "baseline_holds": true,
+      "mutants_killed": true
+    },
+    "P5": {
+      "pass": true,
+      "baseline_holds": true,
+      "mutants_killed": true
+    },
+    "P6": {
+      "pass": true,
+      "baseline_holds": true,
+      "mutants_killed": true
+    },
+    "P7": {
+      "pass": true,
+      "baseline_holds": true,
+      "mutants_killed": true
+    },
+    "P8": {
+      "pass": true,
+      "baseline_holds": true,
+      "mutants_killed": true
+    },
+    "P9": {
+      "pass": true,
+      "baseline_holds": true,
+      "mutants_killed": true
+    },
+    "P10": {
+      "pass": true,
+      "baseline_holds": true,
+      "mutants_killed": true
+    }
+  },
+  "mutants": {
+    "P1": {
+      "duplicate_fail": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": true,
+        "check": "validation"
+      },
+      "pass_after_fail": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": true,
+        "check": "validation"
+      },
+      "remove_replacement_check": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": true,
+        "check": "validation"
+      },
+      "allow_error_replacement": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": true,
+        "check": "validation"
+      }
+    },
+    "P2": {
+      "no_finite": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": true,
+        "check": "p2_values"
+      },
+      "map_401": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": true,
+        "check": "p2_wire"
+      },
+      "masked_availability": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": true,
+        "check": "p2_masked_answer"
+      }
+    },
+    "P3": {
+      "catch_cancel": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": true,
+        "check": "validation"
+      },
+      "catch_cancel_as_availability": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": true,
+        "check": "validation"
+      },
+      "remove_cancel_flag": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": true,
+        "check": "validation"
+      }
+    },
+    "P7": {
+      "unchecked_data_url": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": null,
+        "check": "p7_bad"
+      },
+      "unchecked_mapping": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": null,
+        "check": "p7_request_encoding"
+      },
+      "drop_text_only_images": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": null,
+        "check": "p7_valid"
+      }
+    },
+    "P10": {
+      "unchecked_request_id": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": null,
+        "check": "p10_body_request_id"
+      },
+      "copy_error_text": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": null,
+        "check": "p10_message"
+      }
+    },
+    "P4": {
+      "strict_threshold": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": null,
+        "check": "p4"
+      },
+      "swap_branches": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": null,
+        "check": "p4"
+      }
+    },
+    "P5": {
+      "round_probability": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": null,
+        "check": "p5"
+      },
+      "drop_answer_key": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": null,
+        "check": "p5"
+      },
+      "requested_as_response": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": null,
+        "check": "p5"
+      }
+    },
+    "P6": {
+      "double_call": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": true,
+        "check": "validation"
+      }
+    },
+    "P8": {
+      "shared_answer": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": true,
+        "check": "concurrency"
+      }
+    },
+    "P9": {
+      "drop_caller_metadata": {
+        "killed": true,
+        "replay_or_generated": true,
+        "tlc": null,
+        "check": "p9_results"
+      }
+    }
+  },
+  "counterexamples": {},
+  "visible_formal_artifacts": 21,
+  "thread_cancellation_boundary": "The flag read immediately before system_one is the request commit point. Cancellation delivered after it cannot stop the sync request.",
+  "evidence_directory": "/var/folders/kv/tr18qvls1yjclw_kfllmr5kr0000gn/T/drex-formal-dgrdf7c8"
+}

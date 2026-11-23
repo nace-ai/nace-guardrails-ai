@@ -1,0 +1,38 @@
+---
+title: "One Guardrails validation"
+---
+stateDiagram-v2
+  s0: Validation ready
+  s1: Error propagates
+  s2: Validation cancelled
+  s3: Drex call in flight
+  s4: Worker checks input
+  s5: Pass returned
+  s6: Cancelled while worker still checks input
+  s7: Replacement ready
+  s8: Replacement call in flight
+  s9: Correction pending
+  s10: Replacement raises
+  s11: Worker checks replacement
+  s12: Guardrails applies correction
+  [*] --> s0
+  s0 --> s2: caller cancels
+  s0 --> s4: worker begins
+  s0 --> s3: request commits and starts
+  s0 --> s1: input is refused
+  s3 --> s1: validator handles Drex reply
+  s3 --> s2: caller cancels
+  s3 --> s5: validator handles Drex reply
+  s3 --> s7: validator handles Drex reply
+  s4 --> s3: request commits and starts
+  s4 --> s6: caller cancels
+  s4 --> s1: input is refused
+  s6 --> s2: request commits and starts or replacement commits and starts
+  s7 --> s8: replacement commits and starts
+  s8 --> s10: validator handles replacement reply
+  s8 --> s2: caller cancels
+  s8 --> s9: validator handles replacement reply
+  s7 --> s11: worker begins replacement check
+  s9 --> s12: Guardrails handles original failure
+  s11 --> s8: replacement commits and starts
+  s11 --> s6: caller cancels
